@@ -8,7 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.student.api.entity.Student;
+import com.student.api.repository.DepartmentRepository;
 import com.student.api.repository.StudentRepository;
+import com.student.api.repository.SubjectRepository;
 import com.student.api.service.StudentService;
 
 @Service
@@ -16,9 +18,21 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private SubjectRepository subjectRepository;
 
 	@Override
 	public Student createStudent(Student student) {
+		if(student.getDepartment()!=null) {
+			departmentRepository.save(student.getDepartment());
+		}
+		if(student.getSubjects()!=null && student.getSubjects().size() > 0) {
+			subjectRepository.saveAll(student.getSubjects());
+		}
 		return studentRepository.save(student);
 	}
 
@@ -55,7 +69,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public List<Student> getStudentDetailsByName(String name) {
-		return studentRepository.findByName(name);
+		return studentRepository.getByName(name);
 	}
 
 	@Override
@@ -81,16 +95,6 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public List<Student> getStudentsByDepartmentName(String departmentName) {
-		return studentRepository.findByDepartmentDepartmentName(departmentName);
-	}
-
-	@Override
-	public List<Student> getStudentsBySubjectName(String subjectName) {
-		return studentRepository.findBySubjectsSubjectName(subjectName);
-	}
-
-	@Override
 	public List<Student> getStudentsByEmailLike(String email) {
 		return studentRepository.findByEmailIsLike(email);
 	}
@@ -98,6 +102,11 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public List<Student> getStudentsByNameStartsWith(String name) {
 		return studentRepository.findByNameStartsWith(name);
+	}
+
+	@Override
+	public List<Student> getStudentsByDepartmentId(String departmentId) {
+		return studentRepository.findByDepartmentDepartmentId(departmentId);
 	}
 	
 }

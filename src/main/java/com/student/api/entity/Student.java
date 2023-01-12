@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -27,8 +28,10 @@ public class Student {
 	@Field(name = "mail")
 	private String email;
 	
+	@DBRef
 	private Department department;
 	
+	@DBRef
 	private List<Subject> subjects;
 	
 	@Transient
@@ -43,6 +46,15 @@ public class Student {
 			return total/subjects.size();
 		}
 		return 0.00;
+	}
+
+	public Student(String studentId, String name, String email, Department department, List<Subject> subjects) {
+		super();
+		this.studentId = studentId;
+		this.name = name;
+		this.email = email;
+		this.department = department;
+		this.subjects = subjects;
 	}
 
 }

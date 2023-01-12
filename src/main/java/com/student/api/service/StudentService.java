@@ -25,12 +25,10 @@ public interface StudentService {
 	List<Student> getAllWithPagination(int pageNo, int size);
 	
 	List<Student> getSortedStudentList();
-	
-	List<Student> getStudentsByDepartmentName(String departmentName);
-
-	List<Student> getStudentsBySubjectName(String subjectName);
 
 	List<Student> getStudentsByEmailLike(String email);
 
 	List<Student> getStudentsByNameStartsWith(String name);
+
+	List<Student> getStudentsByDepartmentId(String departmentId);
 }

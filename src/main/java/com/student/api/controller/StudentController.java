@@ -75,15 +75,6 @@ public class StudentController {
 		return new ResponseEntity<List<Student>>(studentService.getSortedStudentList(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/byDepartmentName")
-	public ResponseEntity<List<Student>> getStudentListByDepartmentName(@RequestParam String departmentName){
-		return new ResponseEntity<List<Student>>(studentService.getStudentsByDepartmentName(departmentName), HttpStatus.OK);
-	}
-	
-	@GetMapping("/bySubjectName")
-	public ResponseEntity<List<Student>> getStudentListBySubjectName(@RequestParam String subjectName){
-		return new ResponseEntity<List<Student>>(studentService.getStudentsBySubjectName(subjectName), HttpStatus.OK);
-	}
 	
 	@GetMapping("/emailLike")
 	public List<Student> getStudentListByEmail(@RequestParam String email){
@@ -93,6 +84,11 @@ public class StudentController {
 	@GetMapping("/nameStartsWith")
 	public List<Student> getStudentListByNameStartsWith(@RequestParam String name){
 		return studentService.getStudentsByNameStartsWith(name);
+	}
+	
+	@GetMapping("/byDepartmentId")
+	public List<Student> getStudentListByDepartmentId(@RequestParam String departmentId){
+		return studentService.getStudentsByDepartmentId(departmentId);
 	}
 	
 }
