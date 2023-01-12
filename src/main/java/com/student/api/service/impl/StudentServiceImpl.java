@@ -1,4 +1,4 @@
-package com.student.api.service;
+package com.student.api.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.student.api.entity.Student;
 import com.student.api.repository.StudentRepository;
+import com.student.api.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService{
